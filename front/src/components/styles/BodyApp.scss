@@ -1,0 +1,58 @@
+.bodyApp {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.navbar {
+    display: flex;
+    flex-direction: column;
+    height: 56.1rem;
+    background-color: crimson;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.sendposts {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.postcomment {
+    height: 3rem;
+    width: 20rem;
+}
+.date {
+    display: block;
+    text-align: right;
+}
+.post {
+    border: 1px solid red;
+    width: -webkit-fill-available;
+}
+
+.profil {
+    display: flex;
+    flex-direction: row;
+    align-items: baseline;
+    height: 4rem;
+}
+
+.img-profil-post {
+    margin: 0.5rem 0 0 0.5rem;
+    width: 4rem;
+    height: 4rem;
+    border: 1px solid blue;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.img-post {
+    display: flex;
+    border: 1px solid black;
+    object-fit: cover;
+    
+}
+
