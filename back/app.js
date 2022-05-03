@@ -31,7 +31,7 @@ app.use(bodyParser.json());
       message: "Hello from the express server"
   });
 });
-*/
+
 //route files
 
 /*const comments = require('./routes/comments.routes')
@@ -40,12 +40,7 @@ const users = require('./routes/users.routes')
 
 
 //routes
-app.use("/api/auth", users,(req, res) => {
-  res.status(200).json({
-      status: "success",
-      message: "teste du post reussi"
-  });
-});
+app.use("/api/auth", users);
 /*app.use("/api/comments", comments);
 app.use("/api/posts", posts)*/
 
