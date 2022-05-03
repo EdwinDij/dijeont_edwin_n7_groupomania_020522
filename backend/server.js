@@ -1,14 +1,15 @@
-const express = require ('express')
-const app = express()
+const express = require("express");
+const app = express();
+const cors = require("cors");
 
-const mysql = require ('mysql');
-const db = mysql.createConnection( {
-    host : 'localhost',
-    user : 'root',
-    password : '191623Er!',
-    database : groupomania,
-})
+app.use(cors());
+app.use(express.json());
 
-app.listen(8000, (req, res) => {
-    console.log ('server on')
+const userRoute = require("./routes/user.routes");
+app.use("/user", userRoute);
+const uploadRoute = require("./routes/post.routes");
+app.use("/upload", uploadRoute);
+
+app.listen(3001, (req, res) => {
+  console.log("Server running...");
 });
