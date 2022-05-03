@@ -10,7 +10,7 @@ router.post("/register", (req, res) => {
   const email = req.body.email;
   const password = req.body.password;
   db.query(
-    "INSERT INTO users (firstname, lastname, email ,password ) VALUES (?, ?, ?, ?);",
+    "INSERT INTO users (lastname, firstname, email ,password ) VALUES (?, ?, ?, ?);",
     [firstname, lastname, email, password],
     (err, results) => {
       console.log(err);
