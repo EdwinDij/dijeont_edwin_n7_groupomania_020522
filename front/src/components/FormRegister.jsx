@@ -35,10 +35,9 @@ export default class Register extends React.Component {
           password: this.state.password,
       }
     e.preventDefault();
-    axios.post('http://localhost:8000/api/auth/signup', {users})
-      .then (res => {
-          console.log(res);
-          console.log(res.data)
+    axios.post('http://localhost:8000/user/register', {users})
+      .then ((response)=>{
+          console.log(response)
       })
   }
     render () {
@@ -50,7 +49,7 @@ export default class Register extends React.Component {
                 <div className="image">
                     <img src={logo} alt="logo-groupomania" />
                 </div>
-                <form className="form" onSubmit={this.handleSubmit}>
+                <form className="form">
                     <div className="form-group">
                         <label htmlFor="email"> Email</label>
                         <input onChange={this.handleChange}type="text" name="email" placeholder="Email" />
@@ -67,7 +66,7 @@ export default class Register extends React.Component {
                         <label htmlFor="password"> Mot de passe</label>
                         <input onChange={this.handleChange} type="password" name="password" placeholder="Mot de passe" />
                     </div> <div className="footer">
-                <button type='Submit' className="btn">
+                <button onClick={this.handleSubmit} className="btn">
                     Inscription
                 </button>
             </div>

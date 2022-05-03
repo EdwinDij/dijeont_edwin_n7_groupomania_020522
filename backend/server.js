@@ -5,11 +5,11 @@ const cors = require("cors");
 app.use(cors());
 app.use(express.json());
 
-const userRoute = require("./routes/user.routes");
+const userRoute = require("./routes/User");
 app.use("/user", userRoute);
-const uploadRoute = require("./routes/post.routes");
-app.use("/upload", uploadRoute);
+const postRoute = require("./routes/Post");
+app.use("/post", postRoute);
 
-app.listen(3001, (req, res) => {
+app.listen(8000, (req, res) => {
   console.log("Server running...");
 });
