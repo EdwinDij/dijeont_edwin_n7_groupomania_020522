@@ -1,16 +1,19 @@
 const express = require("express");
 const router = express.Router();
-
 const db = require("../config/db");
+const bcrypt = require ("bcrypt");
+const saltRounds = 10;
 
 
 router.post("/register", (req, res) => {
-
   const firstname = req.body.firstname;
   const lastname = req.body.lastname;
   const email = req.body.email;
-  const password = req.body.password;
-  
+  var password = req.body.password;
+
+    bcrypt.hash (password, saltRounds, (err, hash) =>{
+      if(err) throw err;
+      password = hash;
       db.query(
         "INSERT INTO users (lastname, firstname, email ,password ) VALUES (?, ?, ?, ?);",
         [lastname, firstname, email, password],
@@ -20,7 +23,7 @@ router.post("/register", (req, res) => {
         }
       )
     })
-
+  })
 
 router.post("/login", (req, res) => {
   const email = req.body.email;
