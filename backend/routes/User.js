@@ -3,21 +3,24 @@ const router = express.Router();
 
 const db = require("../config/db");
 
+
 router.post("/register", (req, res) => {
 
   const firstname = req.body.firstname;
   const lastname = req.body.lastname;
   const email = req.body.email;
   const password = req.body.password;
-  db.query(
-    "INSERT INTO users (lastname, firstname, email ,password ) VALUES (?, ?, ?, ?);",
-    [firstname, lastname, email, password],
-    (err, results) => {
-      console.log(err);
-      res.send(results);
-    }
-  );
-});
+  
+      db.query(
+        "INSERT INTO users (lastname, firstname, email ,password ) VALUES (?, ?, ?, ?);",
+        [lastname, firstname, email, password],
+        (err, results) => {
+          console.log(err);
+          res.send(results);
+        }
+      )
+    })
+
 
 router.post("/login", (req, res) => {
   const email = req.body.email;
@@ -36,11 +39,11 @@ router.post("/login", (req, res) => {
         } else {
           res.json({
             loggedIn: false,
-            message: "Wrong email/password combo!",
+            message: "Erreur mail/mot de passe!",
           });
         }
       } else {
-        res.json({ loggedIn: false, message: "User doesn't exist" });
+        res.json({ loggedIn: false, message: "Utilisateur inconnue" });
       }
     }
   );
