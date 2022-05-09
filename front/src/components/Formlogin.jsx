@@ -18,12 +18,12 @@ function Login() {
         })
             .then((response) => {
                 console.log(response)
-                if (response.data.loggedIn) {
+                if (response.status === 200) {
                     localStorage.setItem ("loggedin", true);
                     localStorage.setItem("lastname", response.data.lastname)
                     localStorage.setItem("firstname", response.data.firstname)
                 } else {
-                    setErrorMessage(response.data.message)
+                    setErrorMessage(response.data.msg)
                 }
             })
     }

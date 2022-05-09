@@ -1,16 +1,38 @@
-import React from "react";
 import '../styles/BodyApp.scss'
 import imgprofil from "../../assets/icon.png"
+import {useState} from 'react'
+import axios from 'axios';
+function BodyApp () {
 
-export default class BodyApp extends React.Component {
+    const [firstname, setFirstname] = useState("");
+    const [lastname, Lastname] = useState("");
+    const [content, setContent] = useState("");
+    const [image, setImage] = useState("")
+    const [date, setDate] = useState("");
 
-    render() {
+    // récupérer les commentaires
+
+    function getPost (){
+        axios.get ('http://localhost:8000/',{
+        
+        })
+    }
+//poster un commentaire
+const post = () => {
+    axios.post('http://localhost:8000/post',{
+        firstname : firstname,
+        lastname : lastname,
+        content: content,
+        post_date : date
+    })
+}
         return (
             <div className="bodyApp">
 
                 <div className="sendposts">
                     <input type="text" className="postcomment" />
                     <button type="Submit">Envoyer</button>
+
                     <div className="post">
                         <div className="post-card">
                             <div className="profil">
@@ -28,6 +50,6 @@ export default class BodyApp extends React.Component {
                 </div>
             </div>
         )
-    }
-
 }
+
+export default BodyApp

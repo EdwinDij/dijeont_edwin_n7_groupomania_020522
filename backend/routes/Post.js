@@ -3,15 +3,17 @@ const router = express.Router();
 
 const db = require("../config/db");
 
-router.post("/", (req, res) => {
-  const title = req.body.title;
-  const description = req.body.description;
+router.post("/post", (req, res) => {
+ 
+  const content = req.body.content;
   const image = req.body.image;
-  const author = req.body.author;
-
+  const firstname = req.body.firstname;
+  const lastname = req.body.lastname;
+  const date = req.body.date;
+  
   db.query(
-    "INSERT INTO Uploads (title, description, image, author) VALUES (?, ?, ?, ?);",
-    [title, description, image, author],
+    "INSERT INTO posts ( content, image, firstname, lastname) VALUES (?, ?, ?, ?);",
+    [content, image, firstname, lastname, date],
     (err, results) => {
       console.log(err);
       res.send(results);
@@ -20,7 +22,7 @@ router.post("/", (req, res) => {
 });
 
 router.get("/", (req, res) => {
-  db.query("SELECT * FROM Uploads", (err, results) => {
+  db.query("SELECT * FROM posts", (err, results) => {
     if (err) {
       console.log(err);
     }
