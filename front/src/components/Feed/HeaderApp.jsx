@@ -7,9 +7,13 @@ export default class HeaderApp extends React.Component {
 render() {
     return(
         
-            <div className="header">
+        <div className="header">
             <img className="logo" src={logo} alt="logo groupomania" />
-                <input type="text" className="search" id="search-users" placeholder='Rechercher'/>
+            <div className="profil">
+            <span className='firstname'>ed</span>
+            <span className='lastname'>dijezaeazeae</span>
+            <img className='img-progil' alt="img de profil" />  
+            </div>
         </div>
         
 )

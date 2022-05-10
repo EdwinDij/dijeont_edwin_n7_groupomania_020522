@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import axios from 'axios'
+import { Navigate } from "react-router-dom";
 import logo from '../assets/icon-above-font.png'
 import './styles/Form-style.scss'
 import { validEmail, validPassword, validFirstname, validLastname } from './regex.jsx'

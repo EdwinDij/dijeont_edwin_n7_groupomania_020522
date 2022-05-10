@@ -25,48 +25,50 @@ router.post("/register", (req, res) => {
   })
 })
 
-router.post("/login", (req, res) => {
-  const email = req.body.email;
-  const password = req.body.password;
+router.post('/login', (req, res,) => {
+  const email = req.body.email
+  const password = req.body.password
 
   db.query(
-    "SELECT * FROM users WHERE email = ?",
-    email,
-    (err, results) => {
+    `SELECT * FROM users WHERE email = ${db.escape(email)};`,
+    (err, result) => {
+      // user does not exists
       if (err) {
-        console.log(err);
+        return res.status(400).json({
+          msg: 'err'
+        });
       }
+      if (!result.length) {
+        return res.status(401).json({
+          msg: 'Email or password is incorrect!'
+        });
+      }
+      // check password
+      bcrypt.compare(
+        password,
+        result[0]['password'],
+        (bErr, bResult) => {
+          // wrong password
+          if (bErr) {
 
-      if (results.length > 0) {
-        bcrypt.compare(password, results[0].password, (err, data) => {
-          //if error than throw error
-          if (err) throw err
-
-          //if both match than you can do anything
-          if (data) {
-            return res.status(200).json({ msg: "Login success" })
-          } else {
-            return res.status(401).json({ msg: "Invalid credencial" })
+            return res.status(401).json({
+              msg: 'Email or password is incorrect!'
+            });
           }
+          if (bResult) {
+            const token = jwt.sign({ id: result[0].id }, 'SECRET_TOKEN', { expiresIn: '24h' });
+            return res.status(200).json({
+              msg: 'Logged in!',
+              token,
+              user: result[0]
+            });
+          } else{
+            return res.status(401).json ({ msg: 'Username or password is incorrect!'});
+          }
+        }
+      );
+    }
+  );
+});
 
-        })
-      } else {
-        return res.status(401).json ({msg:"invalid user"})
-      }
-      if (results) {
-        const token = jwt.sign ({id:results[0].id}, 'SECRET_TOKEN',{ expiressIn: '24h'})
-        db.query("UPDATE users SET last_login = now() WHERE id = `${results[0].id}`")
-        return res.status(200).send ({
-          msg: 'Logged in !',
-          token,
-          user: results[0]
-        })
-      }
-      return res.status(401).send({
-        msg: 'email or password is incorrect!'
-      })
-    })
-  })
-
-
-  module.exports = router;
+module.exports = router;

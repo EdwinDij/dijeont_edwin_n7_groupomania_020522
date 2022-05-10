@@ -3,7 +3,7 @@ const router = express.Router();
 
 const db = require("../config/db");
 
-router.post("/post", (req, res) => {
+router.post("/", (req, res) => {
  
   const content = req.body.content;
   const image = req.body.image;

@@ -1,14 +1,16 @@
 import React, { useState } from "react";
+import { Navigate } from "react-router-dom";
 import axios from 'axios';
 import logo from '../assets/icon-above-font.png';
 import './styles/Form-style.scss';
+
+
 
 
 function Login() {
 
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-
     const [errorMessage, setErrorMessage] = useState("");
 
     const submit = () => {
@@ -19,14 +21,11 @@ function Login() {
             .then((response) => {
                 console.log(response)
                 if (response.status === 200) {
-                    localStorage.setItem ("loggedin", true);
-                    localStorage.setItem("lastname", response.data.lastname)
-                    localStorage.setItem("firstname", response.data.firstname)
-                } else {
-                    setErrorMessage(response.data.msg)
+                    console.log(response)
+                    document.location.href='/feed'
                 }
-            })
-    }
+    })
+}
     return (
         <div className="base-container">
             <span className="errors">

@@ -2,6 +2,9 @@ import '../styles/BodyApp.scss'
 import imgprofil from "../../assets/icon.png"
 import {useState} from 'react'
 import axios from 'axios';
+import HeaderApp from './HeaderApp'
+
+
 function BodyApp () {
 
     const [firstname, setFirstname] = useState("");
@@ -27,8 +30,9 @@ const post = () => {
     })
 }
         return (
+            
             <div className="bodyApp">
-
+                    <HeaderApp/>
                 <div className="sendposts">
                     <input type="text" className="postcomment" />
                     <button type="Submit">Envoyer</button>
