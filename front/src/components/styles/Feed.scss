@@ -1,0 +1,50 @@
+.header {
+    height: 3rem;
+    width: 100%;
+    display: flex;
+    background-color: crimson;
+    justify-content: space-between;
+}
+
+.profil {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem
+}
+
+.send-posts {
+    align-items: center;
+}
+
+.cards {
+    border: 1px solid red;
+    display: flex;
+    flex-direction: column;
+    height: auto;
+    width: 30rem;
+    align-content: center;
+    margin: 0 auto;
+    
+}
+.profilUser {
+display: flex;
+gap: 1rem;
+justify-content: fit-content;
+}
+
+.img-profil {
+    height: 2rem;
+    width: 2rem;
+}
+.content {
+    max-width: 100%;
+    max-height: fit-content;
+}
+.text-content {
+    word-wrap:break-word;
+}
+
+.img-content {
+   max-width: 100%;
+   max-height: 100%;
+}
