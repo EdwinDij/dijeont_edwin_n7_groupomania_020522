@@ -9,11 +9,11 @@ router.post("/", (req, res) => {
   const image = req.body.image;
   const firstname = req.body.firstname;
   const lastname = req.body.lastname;
-  const date = req.body.date;
+
   
   db.query(
-    "INSERT INTO posts ( content, image, firstname, lastname) VALUES (?, ?, ?, ?);",
-    [content, image, firstname, lastname, date],
+    "INSERT INTO posts ( content, image_path, firstname, lastname) VALUES (?, ?, ?, ?);",
+    [content, image, firstname, lastname],
     (err, results) => {
       console.log(err);
       res.send(results);

@@ -1,9 +1,18 @@
 import React from "react";
+import axios from "axios";
+import { useState } from "react";
 import logo from '../../assets/icon-bg-remove.png'
 import '../styles/Feed.scss'
 import Cards from './CommentCards.jsx'
 
 function Feed() {
+    const [content, setContent] = useState("");
+
+    const submitPost = () => {
+        axios.post('http://localhost:8000/post/', {
+            content: content,
+        })
+    }
 
     return (
         <div className="container-app">
@@ -15,11 +24,13 @@ function Feed() {
                     <img className='img-progil' alt="img de profil" />
                 </div>
             </div>
-            <input type='text'
-                className="input-post"
-                placeholder="Ecrivez votre commentaire..." />
-            <input type='submit' className="Btn" />
-<Cards/>
+            <div className="inputPost">
+            <input onChange={(event)=>
+            setContent(event.target.value)}
+            type= "text" 
+            name= "Post"/>
+            </div>
+            <Cards />
         </div>
     )
 }
