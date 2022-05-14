@@ -4,6 +4,7 @@ const db = require("../config/db");
 const bcrypt = require("bcrypt");
 const saltRounds = 10;
 const jwt = require('jsonwebtoken')
+const auth = require('../middlewares/jwtAuth')
 
 router.post("/register", (req, res) => {
   const firstname = req.body.firstname;
@@ -72,20 +73,22 @@ router.post('/login', (req, res,) => {
 });
 
 router.post('/deleteUser', (req, res) =>{
-  const firstname = req.body.firstname
-  const lastname = req.body.lastname
-  const admin = req.query.isAdmin
-  const dbFirstname = db.query(`SELECT * FROM users WHERE firstname = ${db.escape(firstname)};`)
-  const dbLastname = db.query (`SELECT * FROM users WHERE lastname = ${db.escape(lastname)};`)
-  const isAdmin = db.query (`SELECT * FROM users WHERE isAdmin = ${db.escape(lastname)};`)
-
-  if (firstname === dbFirstname && lastname === dbLastname || admin === isAdmin){
-    db.query(`DELETE FROM users WHERE WHERE id=?`)
-    return res.status(200).json ({msg: "compte supprimé"})
-  } else {
-    return res.status(400).json({ msg: "Vous n'avez pas les droits de suppression"})
+  const request = req.body;
+  const toDelete = {
+    firstname: request.firstname,
+    lastname: request.lastname,
+    email: request.email,
+    password: request.password,
+    id: request.id,
   }
- 
+  
+  db.query ("DELETE FROM users WHERE id = ?;",
+  [ toDelete.id],
+  (err, results) => {
+    console.log(err);
+    res.send(results)
+  }
+  )
 })
 
 module.exports = router;
