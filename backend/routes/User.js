@@ -71,6 +71,21 @@ router.post('/login', (req, res,) => {
   );
 });
 
+router.post('/deleteUser', (req, res) =>{
+  const firstname = req.body.firstname
+  const lastname = req.body.lastname
+  const admin = req.query.isAdmin
+  const dbFirstname = db.query(`SELECT * FROM users WHERE firstname = ${db.escape(firstname)};`)
+  const dbLastname = db.query (`SELECT * FROM users WHERE lastname = ${db.escape(lastname)};`)
+  const isAdmin = db.query (`SELECT * FROM users WHERE isAdmin = ${db.escape(lastname)};`)
 
+  if (firstname === dbFirstname && lastname === dbLastname || admin === isAdmin){
+    db.query(`DELETE FROM users WHERE WHERE id=?`)
+    return res.status(200).json ({msg: "compte supprimé"})
+  } else {
+    return res.status(400).json({ msg: "Vous n'avez pas les droits de suppression"})
+  }
+ 
+})
 
 module.exports = router;
