@@ -19,12 +19,12 @@ export default class Cards extends React.Component {
             })
     }
 
-    render() {
+    render() { 
         return (
         <div className="cards">
                 <div className="profilUser">
                     <img src="" alt="" className="img-profil" />
-                    {this.state.users.map(users => (<span id="firstname" key= {users.id}> {users.firstname}</span>))}
+                    {this.state.users.map((users) => (<span id="firstname" key= {users.id}> {users.firstname}</span>))}
                     {this.state.users.map(users => (<span id="lasttname" key= {users.id}> {users.lastname} </span>))}
                 </div>
                 <div className="content">

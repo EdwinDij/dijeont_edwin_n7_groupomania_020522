@@ -9,6 +9,8 @@ import './styles/Form-style.scss';
 
 function Login() {
 
+    localStorage.clear()
+
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [errorMessage, setErrorMessage] = useState("");
@@ -21,8 +23,10 @@ function Login() {
             .then((response) => {
                 console.log(response)
                 if (response.status === 200) {
-                    console.log(response)
+                    localStorage.setItem('userInfo', JSON.stringify (response.data))
                     document.location.href='/feed'
+                } else{
+                    setErrorMessage(response.data.msg)
                 }
     })
 }
