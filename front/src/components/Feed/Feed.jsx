@@ -13,6 +13,7 @@ function Feed() {
     const userFirstname = storage.user.firstname;
     const userlastname =  storage.user.lastname;
 
+
     const submitPost = () => {
         axios.post('http://localhost:8000/post/', {
             firstname: userFirstname,

@@ -4,7 +4,7 @@ const db = require("../config/db");
 const bcrypt = require("bcrypt");
 const saltRounds = 10;
 const jwt = require('jsonwebtoken')
-const auth = require('../middlewares/jwtAuth')
+
 
 router.post("/register", (req, res) => {
   const firstname = req.body.firstname;
