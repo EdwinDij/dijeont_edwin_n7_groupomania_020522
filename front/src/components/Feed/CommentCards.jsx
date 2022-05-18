@@ -4,8 +4,10 @@ import Comment from './Comment'
 
 export default class Cards extends React.Component {
 
-    state = {posts: []}
-
+    constructor(props){
+        super(props);
+    this.state = {posts: []}
+    }
 //récupérer les commentaires
     componentDidMount() {
         axios.get("http://localhost:8000/post/")
@@ -22,7 +24,7 @@ export default class Cards extends React.Component {
     render() {
         return (this.state.posts.sort((b, a) => new Date(a.post_date).getTime() - new Date(b.post_date).getTime())
             .map(item => (
-                <div className="cards" key={item.id}>
+                <div className="cards" key={item.posts_id}>
                     <div className="profilUser">
                         <span id="firstname">{item.firstname}</span>
                         <span id="lastname">{item.lastname}</span>

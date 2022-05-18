@@ -24,10 +24,11 @@ router.post('/comment', (req, res) => {
   const content = req.body.comment;
   const firstname = req.body.firstname;
   const lastname = req.body.lastname;
+  const posts = req.body.content
 
   db.query(
-    "INSERT INTO comments ( lastname, firstname, content) VALUES (?, ?, ?);",
-     [lastname, firstname, content],
+    "INSERT INTO comments ( lastname, firstname, content, posts_id) VALUES (?, ?, ?, ?);",
+     [lastname, firstname, content, posts],
     (err, results) => {
       console.log(err);
       res.send(results);
