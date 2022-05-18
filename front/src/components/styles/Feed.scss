@@ -6,16 +6,30 @@
     justify-content: space-between;
 }
 
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
 .profil {
     display: flex;
     align-items: center;
     gap: 0.6rem
 }
 
-.send-posts {
-    align-items: center;
+.inputPost {
+    line-break: auto;
+    outline: none;
+    resize: none;
+    margin-left: 0.3rem;
+    margin-top: 2rem;
+    position: fixed;
 }
-
+.inputSend {
+    gap: 1rem;
+    display: flex;
+    margin-left: 0.6rem;
+}
 .cards {
     box-shadow: 0px 5px 5px rgb(235, 114, 114);
     display: flex;
@@ -23,7 +37,7 @@
     height: auto;
     width: 30rem;
     align-content: center;
-    margin: auto auto 1rem auto;
+    margin: 2rem auto;
     border-radius: 1rem 1rem 0.4rem 0.4rem;
     background-color: rgba(255, 210, 210, 0.13);
 }
@@ -31,7 +45,6 @@
 .profilUser {
     display: flex;
     gap: 0.5rem;
-    justify-content: fit-content;
     padding: 0.8rem;
 
 }
@@ -44,7 +57,6 @@
 .content {
     max-width: 100%;
     max-height: fit-content;
-    border-bottom: 1px solid red;
 }
 
 .text-content {
@@ -55,4 +67,21 @@
 .img-content {
     max-width: 100%;
     max-height: 100%;
+}
+
+.option {
+    font-size: x-large;
+    position: absolute;
+    top: auto;
+    right: 30rem;
+}
+.commentzone{
+    display: flex;
+}
+
+.comment {
+    line-break: auto;
+    outline: none;
+    resize: none;
+
 }

@@ -74,13 +74,7 @@ router.post('/login', (req, res,) => {
 
 router.post('/deleteUser', (req, res) =>{
   const request = req.body;
-  const toDelete = {
-    firstname: request.firstname,
-    lastname: request.lastname,
-    email: request.email,
-    password: request.password,
-    id: request.id,
-  }
+  const toDelete = {id: request.id }
   
   db.query ("DELETE FROM users WHERE id = ?;",
   [ toDelete.id],

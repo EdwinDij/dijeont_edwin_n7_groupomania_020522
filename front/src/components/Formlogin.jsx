@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { Navigate } from "react-router-dom";
 import axios from 'axios';
 import logo from '../assets/icon-above-font.png';
 import './styles/Form-style.scss';

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import  { useState } from "react";
 import axios from 'axios'
 import logo from '../assets/icon-above-font.png'
 import './styles/Form-style.scss'

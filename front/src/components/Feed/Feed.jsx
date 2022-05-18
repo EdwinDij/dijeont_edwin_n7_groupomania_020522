@@ -4,27 +4,34 @@ import { useState } from "react";
 import logo from '../../assets/icon-bg-remove.png'
 import '../styles/Feed.scss'
 import Cards from './CommentCards.jsx'
+import {Link} from "react-router-dom";
 
-function Feed() {
-    const [content, setContent] = useState("");
-//récupérer mon token jwt
+
+ function Feed() {
+    const [content, setContent] = useState([""]);
+    const [media, setMedia] = useState("")
+
+    //récupérer mon token jwt
     const storage = JSON.parse(localStorage.getItem('userInfo'))
     let token = "Bearer" + storage.token;
     const userFirstname = storage.user.firstname;
-    const userlastname =  storage.user.lastname;
+    const userlastname = storage.user.lastname;
 
-
-    const submitPost = () => {
-        axios.post('http://localhost:8000/post/', {
+    //poster un commentaire
+      const submitPost =  () => {
+          
+          axios.post('http://localhost:8000/post/', {
             firstname: userFirstname,
             lastname: userlastname,
             content: content,
-
-        },{
+            media: media,
+        }, {
             headers: {
                 'Authorization': token
             }
+        
         })
+        
     }
 
     return (
@@ -32,22 +39,35 @@ function Feed() {
             <div className="header">
                 <img className="logo" src={logo} alt="logo groupomania" />
                 <div className="profil">
-                    <span className='firstname'>{userFirstname}</span>
-                    <span className='lastname'>{userlastname}</span>
-                    <img className='img-progil' alt="img de profil" />
+                    <Link to="/profil"> <span className='firstname'>{userFirstname}</span> </Link>
+                    <Link to="/profil"> <span className='lastname'>{userlastname}</span> </Link>
+                    <Link to="/profil"> <img className='img-progil' alt="img de profil" /> </Link>
                 </div>
             </div>
             <div className="inputPost">
-            <input onChange={(event)=>
-            setContent(event.target.value)}
-            type= "text" 
-            name= "Post"/>
-            </div>
-            <div className="inputSend">
-                <button onClick={submitPost} className="sendBtn"  value="envoyer">
+                <textarea onChange={(event) =>
+                    setContent(event.target.value)}
+                    cols="40"
+                    rows="5"
+                    type="text"
+                    name="Post"
+                    className="inputPost"
+                    placeholder="Partagez quelque chose">
+                </textarea>
+                <div className="inputSend">
+                <button onClick={submitPost} className="sendBtn" value="envoyer">
                     Envoyer
-                    </button>
+                </button>
+                <input type="file" 
+                name="media" 
+                accept="image/*, 
+                video/*" 
+                onChange={(e) =>
+                setMedia(e.target.value)}/>
             </div>
+        
+            </div>
+
             <Cards />
         </div>
     )
