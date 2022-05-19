@@ -6,7 +6,7 @@ const db = require("../config/db");
 router.post("/", (req, res) => {
 
   const content = req.body.content;
-  const image = req.body.image;
+  const image = `${req.protocol}://${req.get('host')}/images/${req.body.file}`;
   const firstname = req.body.firstname;
   const lastname = req.body.lastname;
 
