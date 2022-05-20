@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const db = require("../config/db");
-
+const multer = require('multer')
 
 router.post("/", (req, res) => {
 
@@ -47,21 +47,19 @@ router.get("/", (req, res) => {
   });
 });
 
-router.post('deletePost', (req, res) => {
+
+router.get("id:post")
+
+router.post('/deletePost', (req, res) => {
   const request = req.body;
-  const toDelete = { id: request.id }
+  const toDelete = { id: request.id };
 
   db.query("DELETE FROM posts where id = ? ",
     [toDelete.id],
     (err, results) => {
-      if (err) {
-        return res.status(400).json({
-          msg: 'err'
-        });
-      } else {
-        return res.send(results)
-      }
-    }
+      console.log(err);
+    res.send(results)
+  }
   )
 })
 

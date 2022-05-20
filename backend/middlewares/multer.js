@@ -13,9 +13,9 @@ const storage = multer.diskStorage({
     callback(null, "images"); // On passe le nom du dossier en destination
     },
     filename: (req, file, callback) => {
-        const name = file.originalname.split(" ").join("_"); // Supprime les éventuels espaces et les remplace pars des underscore
+        const name = file.originalname.split(' ').join('_').split('.')[0];
         const extension = MIME_TYPES[file.mimetype];
-        callback(null, name + Date.now() + '.' +  extension);
+        callback(null, name + "" + Date.now() + '.' + extension);
     }
 });
 

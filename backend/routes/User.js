@@ -4,7 +4,7 @@ const db = require("../config/db");
 const bcrypt = require("bcrypt");
 const saltRounds = 10;
 const jwt = require('jsonwebtoken')
-const multer = require
+
 
 
 router.post("/register", (req, res) => {
@@ -74,7 +74,7 @@ router.post('/login', (req, res,) => {
 });
 
 router.post('/deleteUser', (req, res) =>{
-  const request = req.body;
+  const request = req.body.post_id;
   const toDelete = {id: request.id }
   
   db.query ("DELETE FROM users WHERE id = ?;",
