@@ -3,10 +3,10 @@ const router = express.Router();
 const db = require("../config/db");
 const multer = require('multer')
 
-router.post("/", (req, res) => {
+router.post("/", multer, (req, res) => {
 
   const content = req.body.content;
-  const image = `${req.protocol}://${req.get('host')}/images/${req.body.file}`;
+  const image = `${req.protocol}://${req.get('host')}/images/${req.body.media}`;
   const firstname = req.body.firstname;
   const lastname = req.body.lastname;
 
@@ -48,19 +48,17 @@ router.get("/", (req, res) => {
 });
 
 
-router.get("id:post")
-
 router.post('/deletePost', (req, res) => {
   const request = req.body;
-  const toDelete = { id: request.id };
+  const toDelete = { id: request.posts_id };
 
-  db.query("DELETE FROM posts where id = ? ",
+  db.query("DELETE FROM posts where id = ? ", (err, results) => {
     [toDelete.id],
     (err, results) => {
       console.log(err);
     res.send(results)
   }
-  )
+})
 })
 
 

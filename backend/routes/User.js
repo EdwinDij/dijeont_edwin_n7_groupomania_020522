@@ -73,8 +73,24 @@ router.post('/login', (req, res,) => {
   );
 });
 
+
+
+router.post ('/adminDelete',(req, res) => {
+  const firstname = req.body.firstname;
+  const lastname =  req.body.lastname
+  
+  db.query ("DELETE FROM users WHERE firstname , lastname = ?;",
+  [ firstname, lastname],
+  (err, results) => {
+    console.log(err);
+    res.send(results)
+  }
+  )
+})
+
+
 router.post('/deleteUser', (req, res) =>{
-  const request = req.body.post_id;
+  const request = req.body;
   const toDelete = {id: request.id }
   
   db.query ("DELETE FROM users WHERE id = ?;",

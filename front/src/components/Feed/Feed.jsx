@@ -20,14 +20,18 @@ export default class Feed extends React.Component {
             token: storage.token,
             data: storage || [],
             content: '',
-            media: null,
+            media: '',
         }
         this.handleInputChange = this.handleInputChange.bind(this)
         this.submitPost = this.submitPost.bind(this)
+        this.handleImage = this.handleImage.bind(this)
     }
 
     handleInputChange(e) {
         this.setState({ content: e.target.value })
+    }
+    handleImage(e) {
+        this.setState({ media: e.target.value})
     }
 
     async submitPost() {
@@ -96,7 +100,7 @@ export default class Feed extends React.Component {
                             name="media"
                             accept="image/*, 
                 video/*"
-                            onChange={this} />
+                            onChange={this.handleImage} />
                     </div>
 
                 </div>
