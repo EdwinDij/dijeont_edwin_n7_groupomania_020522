@@ -30,7 +30,7 @@ exports.register = (req, res,) => {
         .catch(error => res.status(500).json({ error }));
 }
 
-exports.login =(req, res) => {
+exports.login = (req, res) => {
     const email = req.body.email
     const password = req.body.password
 
@@ -76,3 +76,18 @@ exports.login =(req, res) => {
   );
 };
 
+exports.delete = (req, res) => {
+    const request = req.body;
+    const toDelete = {
+        firstname: request.firstname,
+        lastname : request.lastname, 
+    }
+console.log(req)
+    db.query("DELETE FROM users WHERE id = ?",
+        [toDelete.firstname, toDelete.lastname], 
+        (err, results) => {
+            console.log(err);
+            res.send(results)
+        }
+    )
+}
