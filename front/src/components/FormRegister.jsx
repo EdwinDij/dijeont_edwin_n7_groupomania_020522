@@ -18,7 +18,7 @@ function Register() {
 
     const submit = () => {
 
-        axios.post('http://localhost:8000/user/register', {
+        axios.post('http://localhost:8000/auth/register', {
             email: email,
             firstname: firstname,
             lastname: lastname,

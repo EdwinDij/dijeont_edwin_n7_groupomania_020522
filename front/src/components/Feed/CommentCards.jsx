@@ -27,7 +27,7 @@ export default function Cards() {
                 Authorization: token,
               },
             });
-            const newPosts = dataPost.filter((posts_id) => dataPost.posts_id !== id);
+            const newPosts = dataPost.filter(posts => posts.posts_id !== id);
             console.log(newPosts)
             setDataPost(newPosts);
           };

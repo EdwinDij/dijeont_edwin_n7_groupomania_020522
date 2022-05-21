@@ -15,7 +15,7 @@ function Login() {
     const [errorMessage, setErrorMessage] = useState("");
 
     const submit = () => {
-        axios.post('http://localhost:8000/user/login', {
+        axios.post('http://localhost:8000/auth/login', {
             email: email,
             password: password,
         })

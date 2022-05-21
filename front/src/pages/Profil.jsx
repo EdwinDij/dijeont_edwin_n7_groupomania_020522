@@ -5,16 +5,22 @@ function Profil() {
     const userFirstname = storage.user.firstname;
     const userLastname = storage.user.lastname;
     const userId = storage.user.id;
+    let token = "Bearer" + storage.token;
   
     const deleteUser = () => {
-
-    axios.post('http://localhost:8000/user/deleteUser', {
-        id: userId,
+    axios.delete('http://localhost:8000/auth/delete', {
+        firstname: userFirstname,
+        lastname: userLastname
+    },{
+        headers: {
+            'Authorization': token
+        }
     })
         .then((response) => {
+            console.log(userId)
             console.log(response)
-            
         })
+
     }
     return (
         <div>
