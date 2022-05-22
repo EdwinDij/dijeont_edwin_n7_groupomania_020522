@@ -82,7 +82,9 @@ exports.delete = (req, res) => {
         firstname: request.firstname,
         lastname : request.lastname, 
     }
-console.log(req)
+    
+  console.log(req.params)
+console.log(request)
     db.query("DELETE FROM users WHERE id = ?",
         [toDelete.firstname, toDelete.lastname], 
         (err, results) => {

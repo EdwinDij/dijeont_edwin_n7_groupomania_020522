@@ -1,7 +1,6 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const path = require('path');
-const helmet = require('helmet');
 const userRoutes = require('./routes/user')
 const postRoutes = require ('./routes/post')
 require('dotenv').config()
@@ -17,11 +16,6 @@ app.use((req, res, next) => {
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
-
-
-// middleware
-app.use(helmet());
-
 
 // GET route to handle the request coming from user
 app.get("/", (req, res) => {
