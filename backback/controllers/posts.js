@@ -30,19 +30,18 @@ exports.getPosts = (req, res, next) => {
     };
 
     exports.deletePost = (req, res) => {
-      const request = req.body;
-     /* const toDelete = {
-        id : request.id
-      } */
-      console.log(req)
-      console.log(request)
+      const request = req.params;
+      const toDelete = {
+        id: request.id
+      } 
       console.log(req.params)
-     /* 
+      console.log(req.params.id)
       db.query("DELETE FROM posts WHERE id = ?",
       [toDelete.id],
       (err, results) => {
         console.log(err);
         res.send(results)
+        console.log(results)
       }
-      )*/
+      )
     }

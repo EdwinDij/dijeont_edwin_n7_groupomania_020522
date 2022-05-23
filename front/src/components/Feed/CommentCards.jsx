@@ -21,35 +21,38 @@ export default function Cards() {
             })
     }, []);
 
-    const deletePost = posts_id => e => {
+    const deletePost = id => e => {
         e.preventDefault();
         e.stopPropagation();
-        const filterPost = dataPost.filter(e => {
-            return e.posts_id !==id;
-        });
-        setDataPost(filterPost);
 
-        fetch(('http://localhost:8000/post/delete' + dataPost.posts_id), {
+        fetch(('http://localhost:8000/post/delete/'+ id), {
             method: "delete",
             headers: {
                 "Content-type": 'application/json',
                 'Authorization': token
             },
             body: JSON.stringify({
-                id: dataPost.posts_id
+                id: dataPost.id
             })
+            
         })
+        const filterPost = dataPost.filter(e => {
+            return e.id !==id;
+        });
+        setDataPost(filterPost);
+        console.log(dataPost)
+        console.log(id)
 
     }
 
 
 
     return (
-        <div>{dataPost.map(post => <div className="cards" key={post.posts_id}>
+        <div>{dataPost.map(post => <div className="cards" key={post.id}>
             <div className="profilUser">
                 <span id="firstname">{post.firstname} </span>
                 <span id="lastname">{post.lastname}</span>
-                <button className="deleteBtn" onClick={deletePost(post.posts_id)}>...</button>
+                <button className="deleteBtn" onClick={deletePost(post.id)}>...</button>
             </div>
             <img src={post.image_path} alt="" />
             <p className="text-content">{post.content}</p>
