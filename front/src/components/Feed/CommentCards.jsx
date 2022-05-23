@@ -21,18 +21,27 @@ export default function Cards() {
             })
     }, []);
 
-    const deletePost = (id) => {
-        axios.post (`http://localhost:8000/post/deletePost/`,{
-            headers: {
-                Authorization: token,
-              },
-            });
-            const newPosts = dataPost.filter(posts => posts.posts_id !== id);
-            console.log(newPosts)
-            setDataPost(newPosts);
-          };
+    const deletePost = posts_id => e => {
+        e.preventDefault();
+        e.stopPropagation();
+        const filterPost = dataPost.filter(e => {
+            return e.posts_id !==id;
+        });
+        setDataPost(filterPost);
 
-    
+        fetch(('http://localhost:8000/post/delete' + dataPost.posts_id), {
+            method: "delete",
+            headers: {
+                "Content-type": 'application/json',
+                'Authorization': token
+            },
+            body: JSON.stringify({
+                id: dataPost.posts_id
+            })
+        })
+
+    }
+
 
 
     return (
@@ -40,7 +49,7 @@ export default function Cards() {
             <div className="profilUser">
                 <span id="firstname">{post.firstname} </span>
                 <span id="lastname">{post.lastname}</span>
-                <button className="deleteBtn" onClick={() => {deletePost(dataPost.posts_id)}}>...</button>
+                <button className="deleteBtn" onClick={deletePost(post.posts_id)}>...</button>
             </div>
             <img src={post.image_path} alt="" />
             <p className="text-content">{post.content}</p>
