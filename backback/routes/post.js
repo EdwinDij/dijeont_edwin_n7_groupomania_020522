@@ -5,5 +5,6 @@ const upload = require('../middleware/multer-config')
 const auth = require('../middleware/auth')
 
 router.get('/', postCtrl.getPosts);
-router.post('/', upload.single('image'), postCtrl.createPost);
+router.post('/', postCtrl.createPost);
+//router.delete('/:id', postCtrl.deletePost);
 module.exports = router;

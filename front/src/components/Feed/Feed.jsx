@@ -20,7 +20,7 @@ export default class Feed extends React.Component {
             token: storage.token,
             data: storage || [],
             content: '',
-            media: '',
+            file: '',
         }
         this.handleInputChange = this.handleInputChange.bind(this)
         this.submitPost = this.submitPost.bind(this)
@@ -31,7 +31,7 @@ export default class Feed extends React.Component {
         this.setState({ content: e.target.value })
     }
     handleImage(e) {
-        this.setState({ media: e.target.value})
+        this.setState({ file: e.target.value})
     }
 
     async submitPost() {
@@ -39,7 +39,7 @@ export default class Feed extends React.Component {
             firstname: this.state.firstname,
             lastname: this.state.lastname,
             content: this.state.content,
-            media: this.state.media,
+            file: this.state.file,
         }, {
             headers: this.state.token
         })
@@ -97,9 +97,8 @@ export default class Feed extends React.Component {
                             Envoyer
                         </button>
                         <input type="file"
-                            name="media"
-                            accept="image/*, 
-                video/*"
+                            name="file"
+                            accept="image/*, video/*"
                             onChange={this.handleImage} />
                     </div>
 
