@@ -3,6 +3,7 @@ const bodyParser = require('body-parser');
 const path = require('path');
 const userRoutes = require('./routes/user')
 const postRoutes = require ('./routes/post')
+const commentRoutes = require ('./routes/comment')
 require('dotenv').config()
 
 const app = express();
@@ -29,5 +30,6 @@ app.get("/", (req, res) => {
 app.use('/images/', express.static(path.join(__dirname, 'images')));
 app.use('/auth', userRoutes);
 app.use('/post', postRoutes);
+app.use('/comment', commentRoutes);
 
 module.exports = app;

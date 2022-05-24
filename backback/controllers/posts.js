@@ -1,6 +1,6 @@
 const db = require("../config/db")
 
-exports.getPosts = (req, res, next) => {
+exports.getPosts = (req, res) => {
     db.query("SELECT * FROM posts", (err, results) => {
         if (err) {
           console.log(err);
@@ -34,7 +34,7 @@ exports.getPosts = (req, res, next) => {
       const toDelete = {
         id: request.id
       } 
-      console.log(req.params)
+  
       console.log(req.params.id)
       db.query("DELETE FROM posts WHERE id = ?",
       [toDelete.id],

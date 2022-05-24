@@ -3,16 +3,17 @@ import React, { useEffect, useState } from "react";
 import Comment from './Comment'
 
 export default function Cards() {
-    const storage = JSON.parse(localStorage.getItem('userInfo'))
+    const storage = JSON.parse(localStorage.getItem('userInfo'));
     const userFirstname = storage.user.firstname;
     const userLastname = storage.user.lastname;
     const userId = storage.user.id;
     const isAdmin = storage.user.isAdmin;
-    const token = storage.user.token
-    const [dataPost, setDataPost] = useState([])
+    let token = "Bearer " + storage.token
+    const [dataPost, setDataPost] = useState([]);
+    const [dataCom, setDataCom] = useState([]);
+    const [content, setContent] = useState('');
 
-
-
+ //gestion des posts
     useEffect(() => {
         axios.get("http://localhost:8000/post/")
             .then(response => {
@@ -40,13 +41,45 @@ export default function Cards() {
             return e.id !==id;
         });
         setDataPost(filterPost);
-        console.log(dataPost)
-        console.log(id)
+        //console.log(dataPost)
+        //console.log(id)
 
     }
+//gestion des commentaires
+
+    const handleInputChange = (event) => {
+        setContent(event.target.value)
+    }
+//récupération des commentaires
+    useEffect(() => {
+        axios.get("http://localhost:8000/comment/")
+            .then(response => {
+                console.log(response)
+                setDataCom(response.data)
+            })
+    }, []);
 
 
+    const submitCom = ()=> {
+  
+        fetch(('http://localhost:8000/comment/'), {
+            method: "post",
+            headers: {
+                "Content-type": 'application/json',
+                'Authorization': token
+            },
+            body: JSON.stringify({
+                firstname: userFirstname,
+                lastname: userLastname,
+                content: content,
+                postId: dataPost,
+            })
+        })
+        console.log(dataPost)
+    
 
+
+    }
     return (
         <div>{dataPost.map(post => <div className="cards" key={post.id}>
             <div className="profilUser">
@@ -56,62 +89,26 @@ export default function Cards() {
             </div>
             <img src={post.image_path} alt="" />
             <p className="text-content">{post.content}</p>
-            <Comment />
+           
+            <div>
+                
+        <div className="commentzone">
+            <textarea cols='20' rows='auto' type="text" name="comment" className="comment" onChange={handleInputChange} ></textarea>
+            <input type="button" value="commenter" className="sendComment" onClick={submitCom} />
+        </div>
+
+        <div>{dataCom.map(comment => <div className="comment" key={comment.posts_id}>
+                <div className="user">
+                <span id="firstname">{comment.firstname}</span>
+                <span className="lastname">{comment.lastname}</span>
+                </div>
+                <p className="content">{comment.content}</p>
+
+            </div>
+            )}</div>
+        </div>
         </div>
         )}</div>
     )
 }
 
-
-/*export default class Cards extends React.Component {
-
-
-    
-    deletePost () {
-        axios.post ("http://localhost:8000/post/deletePost")
-        .then(response => {
-            console.log(response)
-        })
-    }
-
-    deleteUser () {
-        const storage = JSON.parse(localStorage.getItem('userInfo'))
-        const isAdmin = storage.user.isAdmin
-
-        if (isAdmin === 1) {
-        axios.post ("http://localhost:8000/user/adminDelete",{
-            firstname : this.state.posts.firstname,
-            lastname : this.state.posts.lastname,
-        })
-        .then(response => {
-            console.log(response)
-        })
-    
-    } else {
-        alert("vous n'avez pas les droits")
-    }
-    }
-
-    render() {
-    
-        return (this.state.posts.sort((b, a) => new Date(a.post_date).getTime() - new Date(b.post_date).getTime())
-            .map(item => (
-                <div className="cards" key={item.posts_id}>
-                    <div className="profilUser">
-                        <span id="firstname" onClick={this.deleteUser}>{item.firstname}</span>
-                        <span id="lastname">{item.lastname}</span>
-
-                        image de profil ici 
-                        <button onClick={this.deletePost}>...</button>
-                    </div>
-                    <img src={item.image_path} className="img-content" alt="" />
-                    <p className="text-content">{item.content}</p>
-                    <Comment/>
-                </div>
-
-            ))
-        )
-        
-    }
-}
-*/
