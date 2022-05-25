@@ -1,105 +1,15 @@
 const express = require("express");
 const router = express.Router();
-const db = require("../config/db");
-const bcrypt = require("bcrypt");
-const saltRounds = 10;
-const jwt = require('jsonwebtoken')
+const userCtrl = require("../controllers/user");
+const auth = require("../middleware/auth");
+const multer = require("../middleware/multer-configs");
 
-
-
-router.post("/register", (req, res) => {
-  const firstname = req.body.firstname;
-  const lastname = req.body.lastname;
-  const email = req.body.email;
-  var password = req.body.password;
-
-  bcrypt.hash(password, saltRounds, (err, hash) => {
-    if (err) throw err;
-    password = hash;
-    db.query(
-      "INSERT INTO users (lastname, firstname, email ,password ) VALUES (?, ?, ?, ?);",
-      [lastname, firstname, email, password],
-      (err, results) => {
-        console.log(err);
-        res.send(results);
-      }
-    )
-  })
-})
-
-router.post('/login', (req, res,) => {
-  const email = req.body.email
-  const password = req.body.password
-
-  db.query(
-    `SELECT * FROM users WHERE email = ${db.escape(email)};`,
-    (err, result) => {
-      // user does not exists
-      if (err) {
-        return res.status(400).json({
-          msg: 'err'
-        });
-      }
-      if (!result.length) {
-        return res.status(401).json({
-          msg: 'Email or password is incorrect!'
-        });
-      }
-      // check password
-      bcrypt.compare(
-        password,
-        result[0]['password'],
-        (bErr, bResult) => {
-          // wrong password
-          if (bErr) {
-
-            return res.status(401).json({
-              msg: 'Email or password is incorrect!'
-            });
-          }
-          if (bResult) {
-            const token = jwt.sign({ id: result[0].id }, 'SECRET_TOKEN', { expiresIn: '24h' });
-            return res.status(200).json({
-              msg: 'Logged in!',
-              token,
-              user: result[0]
-            });
-          } else{
-            return res.status(401).json ({ msg: 'Username or password is incorrect!'});
-          }
-        }
-      );
-    }
-  );
-});
-
-
-
-router.post ('/adminDelete',(req, res) => {
-  const firstname = req.body.firstname;
-  const lastname =  req.body.lastname
-  
-  db.query ("DELETE FROM users WHERE firstname , lastname = ?;",
-  [ firstname, lastname],
-  (err, results) => {
-    console.log(err);
-    res.send(results)
-  }
-  )
-})
-
-
-router.post('/deleteUser', (req, res) =>{
-  const request = req.body;
-  const toDelete = {id: request.id }
-  
-  db.query ("DELETE FROM users WHERE id = ?;",
-  [ toDelete.id],
-  (err, results) => {
-    console.log(err);
-    res.send(results)
-  }
-  )
-})
+//DIFFERENTE ROUTES POUR LES UTILISATEURS, COMPRENNANTS LES DIFFERENTS MIDDLEWARE UTILES ET D'AUTHENTIFICATION
+router.post("/signup", userCtrl.signup);
+router.post("/login", userCtrl.login);
+router.get("/:id", auth, userCtrl.me);
+router.put("/:id", auth, multer, userCtrl.editUser);
+router.delete("/:id", auth, userCtrl.deleteUser);
+router.get("/", auth, userCtrl.getAllUser);
 
 module.exports = router;
