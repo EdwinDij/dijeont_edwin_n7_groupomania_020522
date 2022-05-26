@@ -37,29 +37,29 @@ const SignUp = () => {
           setFormSubmit(true);
         })
         .catch((err) => {
-          if (err.response.data.error.length == 3) {
+          if (err.response.data.error.length === 3) {
             emailError.innerHTML = err.response.data.error[0].message;
             passwordError.innerHTML = err.response.data.error[1].message;
             pseudoError.innerHTML = err.response.data.error[2].message;
           }
-          if (err.response.data.error.length == 2) {
-            if (err.response.data.error[0].path == "email") {
+          if (err.response.data.error.length === 2) {
+            if (err.response.data.error[0].path === "email") {
               emailError.innerHTML = err.response.data.error[0].message;
-              if (err.response.data.error[1].path == "password") {
+              if (err.response.data.error[1].path === "password") {
                 passwordError.innerHTML = err.response.data.error[1].message;
               } else {
                 pseudoError.innerHTML = err.response.data.error[1].message;
               }
-            } else if (err.response.data.error[0].path == "password") {
+            } else if (err.response.data.error[0].path === "password") {
               passwordError.innerHTML = err.response.data.error[0].message;
               pseudoError.innerHTML = err.response.data.error[1].message;
             }
           } else {
-            if (err.response.data.error[0].path == "email") {
+            if (err.response.data.error[0].path === "email") {
               emailError.innerHTML = err.response.data.error[0].message;
-            } else if (err.response.data.error[0].path == "password") {
+            } else if (err.response.data.error[0].path === "password") {
               passwordError.innerHTML = err.response.data.error[0].message;
-            } else if (err.response.data.error[0].path == "pseudo") {
+            } else if (err.response.data.error[0].path === "pseudo") {
               pseudoError.innerHTML = err.response.data.error[0].message;
             }
           }
