@@ -1,17 +1,14 @@
 import React, { useState, useContext } from "react";
-import { UidContext } from "../AppContext";
 import axios from "axios";
 import Swal from "sweetalert2";
-import { useParams } from "react-router-dom";
+
 
 //BOUTTON MODIFIER UN POST
 const UpdateButton = ({ post }) => {
     const [showEdit, setShowEdit] = useState(false);
-    const [message, setMessage] = useState(post.message);
     const [textEdit, setTextEdit] = useState("");
-    const [isLoaded, setIsLoaded] = useState(false);
     const id = post.id
-    const uid = useContext(UidContext);
+
 
 
     const updatePost = () => {
@@ -22,17 +19,36 @@ const UpdateButton = ({ post }) => {
                     Authorization: `Bearer ${sessionStorage.getItem("authToken")}`,
                 },
            })
+          
+           .then (() => {
+            console.log(data)
+            console.log(post)
+            console.log(post.message)
+            if (post.message === data.message || data.message === "") {
+                alert ("Veuillez entrer un message valide")
+            }else{
+            Swal.fire({
+                title: "Post modifié",
+                text: "Le post a été modifié",
+                icon: "success",
+                confirmButtonText: "Ok",
+            })
+            .then(() => {
+                setShowEdit(false);
+                setTextEdit("");
+                window.location = "/";
+            
+            })                
+    }})
        }
     
     return (
-        <div className="edit">
+        <div className="edit-btn">
 
-            <button className="edit-btn" onClick={(e) => {
+                <i className="fas fa-edit" onClick={(e) => {
                 e.preventDefault();
                 setShowEdit(!showEdit)
-            }}>
-                <i className="fas fa-edit"></i>
-            </button>
+            }}></i>
             {showEdit && (
                 <div className="edit">
                     <input
@@ -43,7 +59,7 @@ const UpdateButton = ({ post }) => {
                         onChange={(e) => setTextEdit(e.target.value)}
                         value={textEdit}
                     ></input>
-                    <button type="submit"className="Valider" onClick={updatePost}>
+                    <button type="submit"className="edit-validate" onClick={updatePost}>
                         Valider
                     </button>
                 </div>

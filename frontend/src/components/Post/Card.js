@@ -47,7 +47,7 @@ const Card = ({ post }) => {
         <div className="card-main">
           <p>{post.message}</p>
           {post.picture && (
-            <img src={post.picture} alt="photo du post" className="card-pic" />
+            <img src={post.picture} alt="post" className="card-pic" />
           )}
           {post.video && (
             <iframe

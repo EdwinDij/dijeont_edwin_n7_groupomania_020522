@@ -24,7 +24,7 @@ const DeleteButton = ({ post }) => {
         Swal.fire("Supprimé", "votre Post a été supprimé", "success");
         axios({
           method: "delete",
-          url: `http://localhost:5000/api/post/${id}`,
+          url: `${process.env.REACT_APP_API_URL}api/post/${id}`,
           headers: {
             Authorization: `Bearer ${sessionStorage.getItem("authToken")}`,
           },

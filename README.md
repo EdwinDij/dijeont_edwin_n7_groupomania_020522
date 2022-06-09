@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Groupomania
 
 Groupomania est un projet d'intranet d'entreprise destiné à améliorer la productivité et l'échange entre les employés de l'entreprise.
@@ -23,9 +24,14 @@ npm start
 ```
 
 si le serveur ne s'ouvre pas allez à :
-[http://localhost:3000/](http://localhost:3000/)
+[http://localhost:[VOTREPORT]/profil](http://localhost:[VOTREPORT]/profil)
 
 ## Backend
+
+- Créer un dossier images.
+- Renommer le fichier .env-exemple en .env, puis mettrele PORT que vous souhaitez utiliser.
+
+- Renommer le fichier config.json-example en config.json => path:config/config.json.exemple, puis mettre les informations de votre Base de donnée.
 
 Ouvrir le terminal et se positionner dans le dossier backend
 
@@ -42,21 +48,26 @@ npm install
 pour finir lancer le serveur
 
 ```bash
-node server
+npm start
 ```
 
-## Base de données
 
-Se connecter au serveur MySql de votre choix. Exécuter la commande: CREATE DATABASE groupomania; Vérifiez les identifiants dans le fichier config.json du dossier Backend puis importer le fichier database_groupomania.sql
+=======
+# Installer du projet
 
-## Utilisation
+## Pour le backend:  
+`cd backend`
+- Créer un dossier images.
+- `npm install` pour installer toutes les dépendences nécessaires.
+- Renommer le fichier .env-exemple en .env, puis mettre les données de votre base de donnée et le PORT que vous souhaitez utiliser.
+- Et pour finir `npm start`
 
-L'application a plusieurs fonctionnalitées :
+## Dans le frontend:
+`cd frontend`
+- `npm install`
+- Renommer le fichier .env-exemple en .env, puis mettre les données de votre base de donnée et le PORT que vous souhaitez utiliser.
+- `npm start`
+Au lancement l'applpication se lance sur: localhost:[VOTREPORT]. Veuillez ajouter /profilà la fin de l'url, pour avoir accès à létape d'inscription/connection.
 
-- Inscription / Connexion / Déconnexion
-- Suppression de son compte
-- Affichage des posts de tous les utilisateurs
-- Afficher le profil de chaque utilisateur + ses posts postés + ses posts likés
-- Possibilité de commenter et liker les posts
-- Poster des posts avec des messages et des images ou des videos(youtube)
-- L'administrateur peut supprimer les posts, les commentaires et les utilisateurs souhaités
+Amusez-vous bien!
+>>>>>>> deaafa3e8a2f3ad88dea3b14be9c91d4eb3c62de

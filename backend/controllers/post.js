@@ -65,7 +65,7 @@ exports.deletePost = (req, res, next) => {
 
 //MODIFICATION D'UN POST
 exports.updatePost = (req, res, next) => {
-
+// modification image
     Post.update(
       {
         message: req.body.message,
@@ -74,8 +74,6 @@ exports.updatePost = (req, res, next) => {
     )
     .then(() => res.status(200).json({ message: "post modifié" }))
     .catch((error) => res.status(500).json({ error }));
-    console.log('message')
-    console.log(req.body.message)
 };
 
 

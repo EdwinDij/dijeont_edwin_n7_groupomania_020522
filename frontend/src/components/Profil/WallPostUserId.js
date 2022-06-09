@@ -55,7 +55,7 @@ const WallPostUserId = ({ infoUser }) => {
                 {postUser.picture && (
                   <img
                     src={postUser.picture}
-                    alt="photo du post"
+                    alt="post"
                     className="card-pic"
                   />
                 )}

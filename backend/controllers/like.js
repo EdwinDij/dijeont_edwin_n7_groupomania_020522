@@ -16,16 +16,12 @@ exports.like = async (req, res, next) => {
     Like.create({ PostId, UserId })
       .then(() => res.status(201).json({ message: "post liké" }))
       .catch((error) => res.status(500).json({ error }));
+
   } else {
     Like.destroy({ where: { PostId, UserId } })
       .then((like) => res.status(200).json({ message: "post disliké" }))
       .catch((error) => res.status(400).json({ error }));
-      return
   }
-
-  Like.findAll({ where: { PostId } })
-    .then((likes) => res.json({ like: likes.length }))
-    .catch((error) => res.status(404).json({ error }));
 };
 
 // RECUPERATION DU COMPTEUR DE LIKE D'UN POST
