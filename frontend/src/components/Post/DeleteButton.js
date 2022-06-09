@@ -2,7 +2,7 @@ import React from "react";
 import axios from "axios";
 import Swal from "sweetalert2";
 
-// BOUTOTN SUPPRESSION DE POST
+// BOUTTON SUPPRESSION DE POST
 const DeleteButton = ({ post }) => {
   const id = post.id;
 
@@ -24,7 +24,7 @@ const DeleteButton = ({ post }) => {
         Swal.fire("Supprimé", "votre Post a été supprimé", "success");
         axios({
           method: "delete",
-          url: `http://localhost:8000/api/post/${id}`,
+          url: `http://localhost:5000/api/post/${id}`,
           headers: {
             Authorization: `Bearer ${sessionStorage.getItem("authToken")}`,
           },

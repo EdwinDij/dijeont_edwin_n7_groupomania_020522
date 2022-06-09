@@ -63,6 +63,22 @@ exports.deletePost = (req, res, next) => {
     .catch((error) => res.status(400).json({ error }));
 };
 
+//MODIFICATION D'UN POST
+exports.updatePost = (req, res, next) => {
+
+    Post.update(
+      {
+        message: req.body.message,
+      },
+      { where: { id: req.params.id } }
+    )
+    .then(() => res.status(200).json({ message: "post modifié" }))
+    .catch((error) => res.status(500).json({ error }));
+    console.log('message')
+    console.log(req.body.message)
+};
+
+
 // RECUPERATION DES POSTS D'UN USER
 exports.getPostByUserId = (req, res, next) => {
   Post.findAll({ where: { UserId: req.params.id } })

@@ -16,7 +16,7 @@ const WallPostUserId = ({ infoUser }) => {
     const getPostUser = async () => {
       await axios({
         method: "get",
-        url: `http://localhost:8000/api/post/${id}`,
+        url: `http://localhost:5000/api/post/${id}`,
         headers: {
           Authorization: `Bearer ${sessionStorage.getItem("authToken")}`,
         },

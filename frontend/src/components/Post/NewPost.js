@@ -24,7 +24,7 @@ const NewPost = () => {
       data.append("video", video);
 
       axios
-        .post("http://localhost:8000/api/post/", data, {
+        .post("http://localhost:5000/api/post/", data, {
           headers: {
             Authorization: `Bearer ${sessionStorage.getItem("authToken")}`,
           },
@@ -43,7 +43,7 @@ const NewPost = () => {
     const getUser = async () => {
       await axios({
         method: "get",
-        url: `http://localhost:8000/api/user/${uid}`,
+        url: `http://localhost:5000/api/user/${uid}`,
         headers: {
           Authorization: `Bearer ${sessionStorage.getItem("authToken")}`,
         },

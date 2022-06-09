@@ -6,19 +6,5 @@
     "host": "localhost",
     "dialect": "mysql",
     "timezone": "+02:00"
-  },
-  "test": {
-    "username": "root",
-    "password": "191623Er!",
-    "database": "groupomaniap7",
-    "host": "localhost",
-    "dialect": "mysql"
-  },
-  "production": {
-    "username": "root",
-    "password": "191623Er!",
-    "database": "groupomaniap7",
-    "host": "localhost",
-    "dialect": "mysql"
   }
 }

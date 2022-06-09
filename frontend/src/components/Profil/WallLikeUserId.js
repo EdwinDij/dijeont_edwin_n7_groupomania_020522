@@ -15,7 +15,7 @@ const WallLikeUserId = () => {
     const getLikeUser = async () => {
       await axios({
         method: "get",
-        url: `http://localhost:8000/api/like/user/${id}`,
+        url: `http://localhost:5000/api/like/user/${id}`,
         headers: {
           Authorization: `Bearer ${sessionStorage.getItem("authToken")}`,
         },

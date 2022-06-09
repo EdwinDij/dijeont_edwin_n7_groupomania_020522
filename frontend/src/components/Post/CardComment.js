@@ -18,7 +18,7 @@ const CardComment = ({ post }) => {
     const getComment = async () => {
       await axios({
         method: "get",
-        url: `http://localhost:8000/api/comment/${PostId}`,
+        url: `http://localhost:5000/api/comment/${PostId}`,
         headers: {
           Authorization: `Bearer ${sessionStorage.getItem("authToken")}`,
         },
@@ -40,7 +40,7 @@ const CardComment = ({ post }) => {
     };
 
     axios
-      .post("http://localhost:8000/api/comment/", data, {
+      .post("http://localhost:5000/api/comment/", data, {
         headers: {
           Authorization: `Bearer ${sessionStorage.getItem("authToken")}`,
         },
@@ -71,7 +71,7 @@ const CardComment = ({ post }) => {
         Swal.fire("Supprimé", "votre commentaire a été supprimé", "success");
         axios({
           method: "delete",
-          url: `http://localhost:8000/api/comment/${id}`,
+          url: `http://localhost:5000/api/comment/${id}`,
           headers: {
             Authorization: `Bearer ${sessionStorage.getItem("authToken")}`,
           },
@@ -102,7 +102,7 @@ const CardComment = ({ post }) => {
             <img src={comment.User.photo} alt="photo de profil" />
             <div className="right-comment">
               <div className="header-comment">
-                {comment.User.pseudo === "Lr4mquGt64H6pjU39N3Y" ? (
+                {comment.User.pseudo == "Lr4mquGt64H6pjU39N3Y" ? (
                   <h3 className="admin-pseudo">ADMIN</h3>
                 ) : (
                   <h3>{comment.User.pseudo}</h3>
@@ -114,7 +114,7 @@ const CardComment = ({ post }) => {
                 <p>{comment.message}</p>
               </div>
               <div className="footer-comment">
-                {uid === comment.UserId || admin === 1 ? (
+                {uid == comment.UserId || admin == 1 ? (
                   <i
                     class="far fa-trash-alt"
                     onClick={() => deleteComment(comment.id)}

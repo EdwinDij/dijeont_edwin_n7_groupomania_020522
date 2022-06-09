@@ -1,4 +1,4 @@
-import React, {  useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import Card from "./Card";
 
@@ -11,7 +11,7 @@ const WallPost = () => {
     const getAllPost = async () => {
       await axios({
         method: "get",
-        url: `http://localhost:8000/api/post/`,
+        url: `http://localhost:5000/api/post/`,
         headers: {
           Authorization: `Bearer ${sessionStorage.getItem("authToken")}`,
         },

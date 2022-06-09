@@ -3,6 +3,7 @@ import { AdminContext, UidContext } from "../AppContext";
 import CardComment from "./CardComment";
 import LikeButton from "./LikeButton";
 import DeleteButton from "./DeleteButton";
+import UpdateButton from "./UpdateButton";
 import Moment from "react-moment";
 import "moment/locale/fr";
 import { Link } from "react-router-dom";
@@ -15,9 +16,11 @@ const Card = ({ post }) => {
   const [showComment, setShowComment] = useState(false);
   const [commentLength, setCommentLength] = useState("");
 
+
   useEffect(() => {
     setCommentLength(post.Comments.length);
   }, [showComment, commentLength]);
+
 
   return (
     <li className="card-container" key={post.id}>
@@ -28,7 +31,7 @@ const Card = ({ post }) => {
       </div>
       <div className="card-right">
         <div className="card-header">
-          {post.User.pseudo === "Lr4mquGt64H6pjU39N3Y" ? (
+          {post.User.pseudo == "Lr4mquGt64H6pjU39N3Y" ? (
             <h2 className="admin-pseudo">ADMIN</h2>
           ) : (
             <h2>{post.User.pseudo} </h2>
@@ -67,12 +70,17 @@ const Card = ({ post }) => {
             <span>{commentLength}</span>
           </div>
           <LikeButton post={post} />
-          {uid === post.User.id || admin ===1 ? (
+          {uid == post.User.id || admin == 1 ? (
             <DeleteButton post={post} />
           ) : null}
+          {uid == post.User.id || admin == 1 ? (
+            <UpdateButton post={post} />
+          ) : null}
         </div>
-        {showComment && <CardComment post={post} />}
+        {showComment && <CardComment post={post}/>}
+        
       </div>
+
     </li>
   );
 };

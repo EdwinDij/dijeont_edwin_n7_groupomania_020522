@@ -27,7 +27,7 @@ const UpdateProfil = () => {
     const getUser = async () => {
       await axios({
         method: "get",
-        url: `http://localhost8000/api/user/${id}`,
+        url: `http://localhost:5000/api/user/${id}`,
         headers: {
           Authorization: `Bearer ${sessionStorage.getItem("authToken")}`,
         },
@@ -56,14 +56,13 @@ const UpdateProfil = () => {
       }
 
       axios
-        .put(`http://localhost:8000/api/user/${uid}`, data, {
+        .put(`http://localhost:5000/api/user/${uid}`, data, {
           headers: {
             Authorization: `Bearer ${sessionStorage.getItem("authToken")}`,
           },
         })
         .then(() => {
           cancelPost();
-
           if (isLoaded) {
             setIsLoaded(false);
           } else {
@@ -117,7 +116,7 @@ const UpdateProfil = () => {
           if (result.isConfirmed) {
             axios({
               method: "delete",
-              url: `http://localhost:8000/api/user/${uid}`,
+              url: `http://localhost:5000/api/user/${uid}`,
               headers: {
                 Authorization: `Bearer ${sessionStorage.getItem("authToken")}`,
               },
@@ -222,7 +221,7 @@ const UpdateProfil = () => {
             </div>
           </div>
         )}
-        {admin === 1 ? (
+        {admin == 1 ? (
           <WallUser />
         ) : (
           <>
