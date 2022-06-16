@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { timestampParser } from "../Utils";
+import Swal from "sweetalert2";
 
 // AFFICHAGE D'UN MUR AVEC TOUT LES UTILISATEURS ENREGISTRE DANS LA DB SQL, POUR QUE L'ADMINISTRATEUR PUISSE LES SUPPRIMER
 const WallUser = () => {
@@ -25,13 +26,23 @@ const WallUser = () => {
 
   const deleteOneUser = (userId) => {
     // SUPPRESSION D'UN UTILISATEUR DANS LA DB SQL GRACE A UN APPEL API AXIOS DANS LE BACKEND: deleteUser
-
-    if (window.confirm("Vous allez supprimer cet utilisateur")) {
-      if (
-        window.confirm(
-          "j'insiste, mais êtes vous sûr de vouloir supprimer cet utilisateur???"
+    Swal.fire({
+      title: 'Êtes-vous sûr?',
+      text: "Vous ne pourrez pas revenir en arrière!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Oui, je veux supprimer!',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        Swal.fire(
+          'Supprimé!',
+          'L\'utilisateur a bien été supprimé.',
+          'success'
         )
-      ) {
+
+
         axios({
           method: "delete",
           url: `http://localhost:5000/api/user/${userId}`,
@@ -46,9 +57,8 @@ const WallUser = () => {
           }
         });
       }
-    }
-  };
-
+    })
+  }
   return (
     <div className="allUser-container">
       <h2>Liste des utilisateurs inscrit sur Groupomania</h2>

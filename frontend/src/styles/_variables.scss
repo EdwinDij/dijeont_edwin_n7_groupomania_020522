@@ -53,7 +53,15 @@ a {
   text-decoration: none;
   color: black;
 }
+.edit-btn {
+  display: flex;
+  flex-direction: row;
+}
+.edit {
+  display: flex;
+  gap: 1rem;
 
+}
 button,
 input[type="submit"] {
   background: $color-2;
