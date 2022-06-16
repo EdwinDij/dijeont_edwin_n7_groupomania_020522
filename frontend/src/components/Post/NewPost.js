@@ -94,7 +94,7 @@ const NewPost = () => {
     <div className="post-container">
       <div className="post-header">
         <Link to={`/profil/${uid}`}>
-          <img src={photoUser} alt="photo de profil" />
+          <img src={photoUser} alt="profil" />
         </Link>
       </div>
       <div className="post-main">

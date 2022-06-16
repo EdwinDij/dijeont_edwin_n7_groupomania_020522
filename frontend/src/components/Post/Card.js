@@ -29,7 +29,7 @@ const Card = ({ post }) => {
       </div>
       <div className="card-right">
         <div className="card-header">
-          {post.User.pseudo == "Lr4mquGt64H6pjU39N3Y" ? (
+          {post.User.pseudo === "Lr4mquGt64H6pjU39N3Y" ? (
             <h2 className="admin-pseudo">ADMIN</h2>
           ) : (
             <h2>{post.User.pseudo} </h2>
@@ -45,7 +45,7 @@ const Card = ({ post }) => {
         <div className="card-main">
           <p>{post.message}</p>
           {post.picture && (
-            <img src={post.picture} alt="photo du post" className="card-pic" />
+            <img src={post.picture} alt="post" className="card-pic" />
           )}
           {post.video && (
             <iframe
@@ -68,10 +68,10 @@ const Card = ({ post }) => {
             <span>{commentLength}</span>
           </div>
           <LikeButton post={post} />
-          {uid == post.User.id || admin == 1 ? (
+          {uid === post.User.id || admin === "1" ? (
             <DeleteButton post={post} />
           ) : null}
-          {uid == post.User.id || admin == 1 ? (
+          {uid === post.User.id || admin === "1" ? (
             <UpdateButton post={post} />
           ) : null}
         </div>

@@ -144,7 +144,7 @@ const UpdateProfil = () => {
       <LeftNav />
       <div className="infoUser-main">
         <div className="infoUser-header">
-          <img src={infoUser.photo} alt="photo de profil" />
+          <img src={infoUser.photo} alt="profil" />
           {uid === id ? (
             <div className="button-edit">
               <button
@@ -222,7 +222,7 @@ const UpdateProfil = () => {
             </div>
           </div>
         )}
-        {admin == 1 ? (
+        {admin === "1" ? (
           <WallUser />
         ) : (
           <>

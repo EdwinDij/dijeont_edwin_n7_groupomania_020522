@@ -99,10 +99,10 @@ const CardComment = ({ post }) => {
             }
             key={comment.id}
           >
-            <img src={comment.User.photo} alt="photo de profil" />
+            <img src={comment.User.photo} alt="profil" />
             <div className="right-comment">
               <div className="header-comment">
-                {comment.User.pseudo == "Lr4mquGt64H6pjU39N3Y" ? (
+                {comment.User.pseudo === "Lr4mquGt64H6pjU39N3Y" ? (
                   <h3 className="admin-pseudo">ADMIN</h3>
                 ) : (
                   <h3>{comment.User.pseudo}</h3>
@@ -114,7 +114,7 @@ const CardComment = ({ post }) => {
                 <p>{comment.message}</p>
               </div>
               <div className="footer-comment">
-                {uid == comment.UserId || admin == 1 ? (
+                {uid === comment.UserId || admin === "1" ? (
                   <i
                     class="far fa-trash-alt"
                     onClick={() => deleteComment(comment.id)}
