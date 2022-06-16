@@ -65,6 +65,7 @@ exports.deletePost = (req, res, next) => {
 
 //MODIFICATION D'UN POST
 exports.updatePost = (req, res, next) => {
+
       Post.update(
         {
           message: req.body.message,
@@ -75,7 +76,7 @@ exports.updatePost = (req, res, next) => {
       .catch((error) => res.status(500).json({ error }));
       console.log(req.body.message)
   };
-  
+
 
 // RECUPERATION DES POSTS D'UN USER
 exports.getPostByUserId = (req, res, next) => {

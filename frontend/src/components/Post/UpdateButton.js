@@ -13,7 +13,9 @@ const UpdateButton = ({ post }) => {
 
     const updatePost = () => {
 
-        const data = { message: textEdit };
+        const data = { 
+            message: textEdit,
+        };
 
            axios.put(`http://localhost:5000/api/post/${id}`, data, {
                 headers: {
@@ -66,6 +68,7 @@ const UpdateButton = ({ post }) => {
                     <button type="submit"className="edit-validate" onClick={updatePost}>
                         Valider
                     </button>
+                    <input className="edit-image" type="file" name="image" id="image" />
                 </div>
             )}
         </div>
