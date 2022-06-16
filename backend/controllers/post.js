@@ -65,17 +65,17 @@ exports.deletePost = (req, res, next) => {
 
 //MODIFICATION D'UN POST
 exports.updatePost = (req, res, next) => {
-// modification image
-    Post.update(
-      {
-        message: req.body.message,
-      },
-      { where: { id: req.params.id } }
-    )
-    .then(() => res.status(200).json({ message: "post modifié" }))
-    .catch((error) => res.status(500).json({ error }));
-};
-
+      Post.update(
+        {
+          message: req.body.message,
+        },
+        { where: { id: req.params.id } }
+      )
+      .then(() => res.status(200).json({ message: "post modifié" }))
+      .catch((error) => res.status(500).json({ error }));
+      console.log(req.body.message)
+  };
+  
 
 // RECUPERATION DES POSTS D'UN USER
 exports.getPostByUserId = (req, res, next) => {

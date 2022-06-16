@@ -16,11 +16,9 @@ const Card = ({ post }) => {
   const [showComment, setShowComment] = useState(false);
   const [commentLength, setCommentLength] = useState("");
 
-
   useEffect(() => {
     setCommentLength(post.Comments.length);
   }, [showComment, commentLength]);
-
 
   return (
     <li className="card-container" key={post.id}>
@@ -47,7 +45,7 @@ const Card = ({ post }) => {
         <div className="card-main">
           <p>{post.message}</p>
           {post.picture && (
-            <img src={post.picture} alt="post" className="card-pic" />
+            <img src={post.picture} alt="photo du post" className="card-pic" />
           )}
           {post.video && (
             <iframe
@@ -78,9 +76,7 @@ const Card = ({ post }) => {
           ) : null}
         </div>
         {showComment && <CardComment post={post}/>}
-        
       </div>
-
     </li>
   );
 };

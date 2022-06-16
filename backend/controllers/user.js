@@ -117,7 +117,6 @@ exports.editUser = (req, res, next) => {
           .json({ message: "l'utilisateur a été edité sans image" })
       )
       .catch((error) => res.status(500).json({ error }));
-
   }
 };
 
@@ -130,7 +129,7 @@ exports.deleteUser = (req, res, next) => {
         User.destroy({ where: { id: req.params.id } })
           .then(() =>
             res.status(200).json({
-              message: "l'utilisateur a été supprimé !! ",
+              message: " tou-tou !! l'utilisateur a été syupprimé !! ",
             })
           )
           .catch((error) => res.status(400).json({ error }));

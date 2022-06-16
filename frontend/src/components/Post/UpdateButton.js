@@ -14,10 +14,14 @@ const UpdateButton = ({ post }) => {
     const updatePost = () => {
 
         const data = { message: textEdit };
+
            axios.put(`http://localhost:5000/api/post/${id}`, data, {
                 headers: {
                     Authorization: `Bearer ${sessionStorage.getItem("authToken")}`,
                 },
+                body: {
+                    message: textEdit,
+                }
            })
           
            .then (() => {
