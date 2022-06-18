@@ -17,7 +17,7 @@ const UpdateProfil = () => {
   const [picture, setPicture] = useState("");
   const [file, setFile] = useState("");
   const [isLoaded, setIsLoaded] = useState(false);
-
+  const BASE_URL = process.env.REACT_APP_API_URL;
   const uid = useContext(UidContext);
   const admin = useContext(AdminContext);
   const { id } = useParams();
@@ -27,7 +27,7 @@ const UpdateProfil = () => {
     const getUser = async () => {
       await axios({
         method: "get",
-        url: `http://localhost:5000/api/user/${id}`,
+        url: `${BASE_URL}api/user/${id}`,
         headers: {
           Authorization: `Bearer ${sessionStorage.getItem("authToken")}`,
         },
@@ -56,7 +56,7 @@ const UpdateProfil = () => {
       }
 
       axios
-        .put(`http://localhost:5000/api/user/${uid}`, data, {
+        .put(`${BASE_URL}api/user/${uid}`, data, {
           headers: {
             Authorization: `Bearer ${sessionStorage.getItem("authToken")}`,
           },
@@ -117,7 +117,7 @@ const UpdateProfil = () => {
           if (result.isConfirmed) {
             axios({
               method: "delete",
-              url: `http://localhost:5000/api/user/${uid}`,
+              url: `${BASE_URL}api/user/${uid}`,
               headers: {
                 Authorization: `Bearer ${sessionStorage.getItem("authToken")}`,
               },

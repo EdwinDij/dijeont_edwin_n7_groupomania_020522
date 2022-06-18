@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import axios from "axios";
 require("dotenv").config();
+const BASE_URL = process.env.REACT_APP_API_URL;
+
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -14,7 +16,7 @@ const Login = () => {
 
     const data = { email, password };
     axios
-      .post("http://localhost:5000/api/user/login", data)
+      .post(`${BASE_URL}api/user/login`, data)
       .then((res) => {
         if (res.data.error) {
           emailError.innerHTML = res.data.error;

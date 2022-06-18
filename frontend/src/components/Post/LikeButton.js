@@ -9,12 +9,13 @@ const LikeButton = ({ post }) => {
   const UserId = uid;
   const PostId = post.id;
   const [isLoaded, setIsLoaded] = useState(false);
+  const BASE_URL = process.env.REACT_APP_API_URL;
 
   useEffect(() => {
     const likeNumber = async () => {
       await axios({
         method: "get",
-        url: `http://localhost:5000/api/like/${post.id}`,
+        url: `${BASE_URL}api/like/${post.id}`,
         headers: {
           Authorization: `Bearer ${sessionStorage.getItem("authToken")}`,
         },
@@ -30,7 +31,7 @@ const LikeButton = ({ post }) => {
 
     await axios({
       method: "post",
-      url: `http://localhost:5000/api/like/`,
+      url: `${BASE_URL}api/like/`,
       data: { PostId, UserId },
       headers: {
         Authorization: `Bearer ${sessionStorage.getItem("authToken")}`,

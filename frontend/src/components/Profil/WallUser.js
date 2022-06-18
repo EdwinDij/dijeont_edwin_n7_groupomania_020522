@@ -7,13 +7,13 @@ import Swal from "sweetalert2";
 const WallUser = () => {
   const [userList, setUserList] = useState([]);
   const [isLoaded, setIsLoaded] = useState(false);
-
+  const BASE_URL = process.env.REACT_APP_API_URL;
   useEffect(() => {
     // RECUPERATIONS DES INFORMATIONS GRACE A UN APPEL API AXIOS DANS LE BACKEND : getAllUser
     const getUsers = async () => {
       await axios({
         method: "get",
-        url: `http://localhost:5000/api/user/`,
+        url: `${BASE_URL}api/user/`,
         headers: {
           Authorization: `Bearer ${sessionStorage.getItem("authToken")}`,
         },
@@ -45,7 +45,7 @@ const WallUser = () => {
 
         axios({
           method: "delete",
-          url: `http://localhost:5000/api/user/${userId}`,
+          url: `${BASE_URL}api/user/${userId}`,
           headers: {
             Authorization: `Bearer ${sessionStorage.getItem("authToken")}`,
           },

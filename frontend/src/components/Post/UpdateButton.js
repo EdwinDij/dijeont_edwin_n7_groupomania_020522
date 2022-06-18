@@ -8,7 +8,7 @@ const UpdateButton = ({ post }) => {
     const [showEdit, setShowEdit] = useState(false);
     const [textEdit, setTextEdit] = useState("");
     const id = post.id
-
+    const BASE_URL = process.env.REACT_APP_API_URL;
 
 
     const updatePost = () => {
@@ -17,7 +17,7 @@ const UpdateButton = ({ post }) => {
             message: textEdit,
         };
 
-           axios.put(`http://localhost:5000/api/post/${id}`, data, {
+           axios.put(`${BASE_URL}api/post/${id}`, data, {
                 headers: {
                     Authorization: `Bearer ${sessionStorage.getItem("authToken")}`,
                 },
@@ -68,7 +68,6 @@ const UpdateButton = ({ post }) => {
                     <button type="submit"className="edit-validate" onClick={updatePost}>
                         Valider
                     </button>
-                    <input className="edit-image" type="file" name="image" id="image" />
                 </div>
             )}
         </div>

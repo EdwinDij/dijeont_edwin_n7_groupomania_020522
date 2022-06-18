@@ -12,13 +12,14 @@ const CardComment = ({ post }) => {
   const [commentList, setCommentList] = useState([]);
   const [isLoaded, setIsLoaded] = useState(false);
   const PostId = post.id;
+  const BASE_URL = process.env.REACT_APP_API_URL;
 
   useEffect(() => {
     // RECUPERATION DES COOMENTAIRES D'UN POST GRACE A L'APPEL API AXIOS DU BACEND: getAllComment
     const getComment = async () => {
       await axios({
         method: "get",
-        url: `http://localhost:5000/api/comment/${PostId}`,
+        url: `${BASE_URL}api/comment/${PostId}`,
         headers: {
           Authorization: `Bearer ${sessionStorage.getItem("authToken")}`,
         },
@@ -40,7 +41,7 @@ const CardComment = ({ post }) => {
     };
 
     axios
-      .post("http://localhost:5000/api/comment/", data, {
+      .post(`${BASE_URL}api/comment/` , data, {
         headers: {
           Authorization: `Bearer ${sessionStorage.getItem("authToken")}`,
         },

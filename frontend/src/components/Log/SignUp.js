@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useState } from "react";
 import Login from "./Login";
+const BASE_URL = process.env.REACT_APP_API_URL;
 
 const SignUp = () => {
   const [formSubmit, setFormSubmit] = useState(false);
@@ -28,7 +29,7 @@ const SignUp = () => {
         "Les mots de passe ne correspondent pas !";
     } else {
       await axios
-        .post("http://localhost:5000/api/user/signup", {
+        .post(`${BASE_URL}api/user/signup`, {
           pseudo,
           email,
           password,

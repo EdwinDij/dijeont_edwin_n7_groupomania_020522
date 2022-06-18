@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import Card from "./Card";
+const BASE_URL = process.env.REACT_APP_API_URL;
 
 //AFFICHAGE D'UN MUR DES DIFFERENTS POST DE LA DB SQL
 const WallPost = () => {
@@ -11,7 +12,7 @@ const WallPost = () => {
     const getAllPost = async () => {
       await axios({
         method: "get",
-        url: `http://localhost:5000/api/post/`,
+        url: `${BASE_URL}api/post/`,
         headers: {
           Authorization: `Bearer ${sessionStorage.getItem("authToken")}`,
         },

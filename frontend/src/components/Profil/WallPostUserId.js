@@ -10,13 +10,13 @@ const WallPostUserId = ({ infoUser }) => {
   const uid = useContext(UidContext);
   const [listPostUser, setListPostUser] = useState([]);
   const { id } = useParams();
-
+  const BASE_URL = process.env.REACT_APP_API_URL;
   useEffect(() => {
     // RECUPERATIONS DES INFORMATIONS GRACE A UN APPEL API AXIOS DANS LE BACKEND : getPostByUserId
     const getPostUser = async () => {
       await axios({
         method: "get",
-        url: `http://localhost:5000/api/post/${id}`,
+        url: `${BASE_URL}api/post/${id}`,
         headers: {
           Authorization: `Bearer ${sessionStorage.getItem("authToken")}`,
         },

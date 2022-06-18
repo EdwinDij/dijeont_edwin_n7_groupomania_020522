@@ -9,13 +9,13 @@ import { Link } from "react-router-dom";
 const WallLikeUserId = () => {
   const [listLikeUser, setListLikeUser] = useState([]);
   const { id } = useParams();
-
+  const BASE_URL = process.env.REACT_APP_API_URL;
   useEffect(() => {
     // RECUPERATIONS DES INFORMATIONS GRACE A UN APPEL API AXIOS DANS LE BACKEND : getLikeUserId
     const getLikeUser = async () => {
       await axios({
         method: "get",
-        url: `http://localhost:5000/api/like/user/${id}`,
+        url: `${BASE_URL}api/like/user/${id}`,
         headers: {
           Authorization: `Bearer ${sessionStorage.getItem("authToken")}`,
         },

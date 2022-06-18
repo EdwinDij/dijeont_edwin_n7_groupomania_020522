@@ -13,7 +13,7 @@ const NewPost = () => {
   const [pseudo, setPseudo] = useState("");
   const [photoUser, setPhotoUser] = useState("");
   const uid = useContext(UidContext);
-
+  const BASE_URL = process.env.REACT_APP_API_URL;
   const handlePost = () => {
     // ENVOI DU NOUVEAU POST DANS LA DB SQL GRACE A UN APPEL API AXIOS DANS LE BACKEND: createPost
     if (message || picture || video) {
@@ -24,7 +24,7 @@ const NewPost = () => {
       data.append("video", video);
 
       axios
-        .post("http://localhost:5000/api/post/", data, {
+        .post(`${BASE_URL}api/post/`, data, {
           headers: {
             Authorization: `Bearer ${sessionStorage.getItem("authToken")}`,
           },
@@ -43,7 +43,7 @@ const NewPost = () => {
     const getUser = async () => {
       await axios({
         method: "get",
-        url: `http://localhost:5000/api/user/${uid}`,
+        url: `${BASE_URL}api/user/${uid}`,
         headers: {
           Authorization: `Bearer ${sessionStorage.getItem("authToken")}`,
         },

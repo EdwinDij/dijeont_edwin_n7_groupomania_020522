@@ -1,6 +1,7 @@
 import React from "react";
 import axios from "axios";
 import Swal from "sweetalert2";
+const BASE_URL = process.env.REACT_APP_API_URL;
 
 // BOUTOTN SUPPRESSION DE POST
 const DeleteButton = ({ post }) => {
@@ -24,7 +25,7 @@ const DeleteButton = ({ post }) => {
         Swal.fire("Supprimé", "votre Post a été supprimé", "success");
         axios({
           method: "delete",
-          url: `http://localhost:5000/api/post/${id}`,
+          url: `${BASE_URL}api/post/${id}`,
           headers: {
             Authorization: `Bearer ${sessionStorage.getItem("authToken")}`,
           },
