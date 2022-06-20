@@ -29,8 +29,8 @@ const DeleteButton = ({ post }) => {
           headers: {
             Authorization: `Bearer ${sessionStorage.getItem("authToken")}`,
           },
-        }).then(() => {
-          window.location.reload();
+        }).then((response) => {
+            window.location.reload();
         });
       }
     });

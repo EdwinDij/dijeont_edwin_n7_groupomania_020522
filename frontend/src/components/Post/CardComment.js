@@ -115,7 +115,7 @@ const CardComment = ({ post }) => {
                 <p>{comment.message}</p>
               </div>
               <div className="footer-comment">
-                {uid === comment.UserId || admin === "1" ? (
+                {uid == comment.UserId || admin == 1 ? (
                   <i
                     class="far fa-trash-alt"
                     onClick={() => deleteComment(comment.id)}

@@ -2,7 +2,7 @@ const { Post } = require("../models");
 const { User } = require("../models");
 const { Like } = require("../models");
 const { Comment } = require("../models");
-
+const auth = require("../middleware/auth");
 // RECUPERATION DE TOUT LES POSTS
 exports.getAllPost = (req, res, next) => {
   Post.findAll({
@@ -58,14 +58,26 @@ exports.createPost = (req, res, next) => {
 
 //SUPPRESSION D'UN POST
 exports.deletePost = (req, res, next) => {
-  Post.destroy({ where: { id: req.params.id } })
-    .then(() => res.status(200).json({ message: "post suprrimé" }))
-    .catch((error) => res.status(400).json({ error }));
-};
+
+  Post.findOne({_id: req.params.id})
+    .then(Post => {
+        if (Post.userId != req.auth) {
+            return res.status(401).json("requête non autorisée !");
+        } else{
+        Post.destroy({ where: { id: req.params.id } })
+        .then(() => res.status(200).json({ message: "post suprrimé" }))
+        .catch((error) => res.status(400).json({ error }));
+        }
+    })
+}
+
 
 //MODIFICATION D'UN POST
 exports.updatePost = (req, res, next) => {
-
+  if (Post.userId != req.auth) {
+    return res.status(401).json("requête non autorisée !");
+  } else {
+  Post.findOne({ _id: req.params.id })
       Post.update(
         {
           message: req.body.message,
@@ -76,7 +88,7 @@ exports.updatePost = (req, res, next) => {
       .catch((error) => res.status(500).json({ error }));
       console.log(req.body.message)
   };
-
+}
 
 // RECUPERATION DES POSTS D'UN USER
 exports.getPostByUserId = (req, res, next) => {

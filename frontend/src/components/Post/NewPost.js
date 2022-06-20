@@ -108,7 +108,7 @@ const NewPost = () => {
         {message || picture || video.length > 20 ? (
           <div className="card-container">
             <div className="card-left">
-              <img src={photoUser} alt="photo de profil" />
+              <img src={photoUser} alt="profil" />
             </div>
             <div className="card-right">
               <div className="card-header">

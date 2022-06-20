@@ -5,7 +5,7 @@ const { Comment } = require("../models");
 const jwt = require("jsonwebtoken");
 const schemajoi = require("../middleware/joischema");
 require("dotenv").config();
-const fs = require("fs");
+
 
 //CREATION DE L'UTILISATEUR
 exports.signup = (req, res, next) => {
