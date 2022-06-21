@@ -3,6 +3,9 @@ const { User } = require("../models");
 const { Like } = require("../models");
 const { Comment } = require("../models");
 const auth = require("../middleware/auth");
+const jwt = require("jsonwebtoken")
+
+
 // RECUPERATION DE TOUT LES POSTS
 exports.getAllPost = (req, res, next) => {
   Post.findAll({
@@ -58,10 +61,13 @@ exports.createPost = (req, res, next) => {
 
 //SUPPRESSION D'UN POST
 exports.deletePost = (req, res, next) => {
+  let token = req.headers.authorization.split(" ")[1];
+const decodedToken = jwt.verify(token, process.env.TOKEN_SECRET);
+const userId = decodedToken.userId;
 
   Post.findOne({_id: req.params.id})
     .then(Post => {
-        if (Post.userId != req.auth) {
+        if (Post.userId != userId && decodedToken.isAdmin==0) {
             return res.status(401).json("requête non autorisée !");
         } else{
         Post.destroy({ where: { id: req.params.id } })
@@ -74,21 +80,26 @@ exports.deletePost = (req, res, next) => {
 
 //MODIFICATION D'UN POST
 exports.updatePost = (req, res, next) => {
-  if (Post.userId != req.auth) {
-    return res.status(401).json("requête non autorisée !");
-  } else {
+let token = req.headers.authorization.split(" ")[1];
+const decodedToken = jwt.verify(token, process.env.TOKEN_SECRET);
+const userId = decodedToken.userId;
+
   Post.findOne({ _id: req.params.id })
-      Post.update(
-        {
-          message: req.body.message,
-        },
-        { where: { id: req.params.id } }
-      )
+  .then(Post => {
+    if(Post.userId != userId && decodedToken.isAdmin==0) {
+        return res.status(401).json("requête non autorisée !");
+    } else {
+      Post.update({where : {id: req.params.id},
+        message: req.body.message,
+        picture: req.body.picture,
+        video: req.body.video,
+      })
       .then(() => res.status(200).json({ message: "post modifié" }))
-      .catch((error) => res.status(500).json({ error }));
-      console.log(req.body.message)
-  };
+      .catch((error) => res.status(400).json({ error }));
+    }
+  })
 }
+ 
 
 // RECUPERATION DES POSTS D'UN USER
 exports.getPostByUserId = (req, res, next) => {
