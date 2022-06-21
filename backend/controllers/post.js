@@ -30,6 +30,13 @@ exports.getAllPost = (req, res, next) => {
 // CREATION D'UN POST ...
 exports.createPost = (req, res, next) => {
   const test = req.file;
+  let token = req.headers.authorization.split(" ")[1];
+  const decodedToken = jwt.verify(token, process.env.TOKEN_SECRET);
+  const userId = decodedToken.id;
+
+  if (req.body.UserId != userId) {
+    return res.status(401).json("requete non authentifiée !");
+  } else {
 
   if (test == null) {
     //...SANS IMAGE
@@ -57,17 +64,21 @@ exports.createPost = (req, res, next) => {
       )
       .catch((error) => res.status(500).json({ error }));
   }
+  }
+  console.log(token)
+  console.log(userId)
 };
 
 //SUPPRESSION D'UN POST
 exports.deletePost = (req, res, next) => {
   let token = req.headers.authorization.split(" ")[1];
-const decodedToken = jwt.verify(token, process.env.TOKEN_SECRET);
-const userId = decodedToken.userId;
+  const decodedToken = jwt.verify(token, process.env.TOKEN_SECRET);
+  const userId = decodedToken.id;
 
   Post.findOne({_id: req.params.id})
     .then(Post => {
-        if (Post.userId != userId && decodedToken.isAdmin==0) {
+        if (Post.UserId !== userId && decodedToken.isAdmin==0) {
+          console.log(Post.UserId)
             return res.status(401).json("requête non autorisée !");
         } else{
         Post.destroy({ where: { id: req.params.id } })
@@ -82,12 +93,14 @@ const userId = decodedToken.userId;
 exports.updatePost = (req, res, next) => {
 let token = req.headers.authorization.split(" ")[1];
 const decodedToken = jwt.verify(token, process.env.TOKEN_SECRET);
-const userId = decodedToken.userId;
+const userId = decodedToken.id;
 
   Post.findOne({ _id: req.params.id })
   .then(Post => {
-    if(Post.userId != userId && decodedToken.isAdmin==0) {
+    if(Post.UserId != userId && decodedToken.isAdmin==0) {
+      console.log(Post.UserId)
         return res.status(401).json("requête non autorisée !");
+        
     } else {
       Post.update({where : {id: req.params.id},
         message: req.body.message,
@@ -100,7 +113,6 @@ const userId = decodedToken.userId;
   })
 }
  
-
 // RECUPERATION DES POSTS D'UN USER
 exports.getPostByUserId = (req, res, next) => {
   Post.findAll({ where: { UserId: req.params.id } })
