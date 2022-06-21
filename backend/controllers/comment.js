@@ -20,7 +20,6 @@ exports.createComment = (req, res) => {
   let token = req.headers.authorization.split(" ")[1];
   const decodedToken = jwt.verify(token, process.env.TOKEN_SECRET);
   const userId = decodedToken.id;
-
   if (req.body.UserId != userId) {
     return res.status(401).json("requete non authentifiée !");
   } else {
@@ -32,7 +31,6 @@ exports.createComment = (req, res) => {
       .then(() => res.status(201).json({ message: "commentaire créé" }))
       .catch((error) => res.status(400).json({ error }));
   };
-  console.log(req.body.UserId, userId);
 }
 
 // SUPPRESSION D'UN COMMENTAIRE

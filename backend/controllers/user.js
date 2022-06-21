@@ -5,6 +5,7 @@ const { Comment } = require("../models");
 const jwt = require("jsonwebtoken");
 const schemajoi = require("../middleware/joischema");
 require("dotenv").config();
+const fs = require("fs");
 
 
 //CREATION DE L'UTILISATEUR
@@ -80,6 +81,14 @@ exports.me = (req, res, next) => {
 // MODIFIER UN UTILISATEUR
 exports.editUser = (req, res, next) => {
   const test = req.file;
+  let token = req.headers.authorization.split(" ")[1];
+  const decodedToken = jwt.verify(token, process.env.TOKEN_SECRET);
+  const userId = decodedToken.id;
+
+  if (req.params.id != userId) {
+    console.log(req.params.id, userId);
+    return res.status(401).json("requete non authentifiée !");
+  } else {
   if (test) {
     //CONDITION SI L'IMAGE EST MODIFIÉ
     User.findOne({ where: { id: req.params.id } })
@@ -118,6 +127,7 @@ exports.editUser = (req, res, next) => {
       )
       .catch((error) => res.status(500).json({ error }));
   }
+}
 };
 
 // SUPPRIMER UN UTILISATEUR
